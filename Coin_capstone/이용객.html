@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이용객</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            overflow-x: auto;
+        }
+/* 상단 히어로 섹션 */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+        .hero-box {
+            position: relative;
+            width: 100%; /* 원하는 너비로 조정 가능 */
+            max-width: 120px;
+            height: 100px; /* 원하는 높이로 조정 가능 */
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .hero-box .background-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+            position: center;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        .hero-box .text-overlay {
+            position: relative;
+            z-index: 2;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        .hero-box h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+        .hero-box p {
+            font-size: 1em;
+            margin: 5px 0 0;
+        }
+/*container 섹션*/
+        .container {
+            width:1300px;
+            margin: 15px 20%;
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+/*메인사진 섹션*/
+        .profile-card {
+            flex: 1;
+            min-width: 600px;
+            max-width: 600px;
+            background-color: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+        }
+        .profile-card img, .profile-card video {
+            width: 100%;
+            height: 600px;
+            display: none;
+            object-fit: cover;
+        }
+        .profile-card img.active, .profile-card video.active {
+            display: block;
+        }
+        .profile-card .info {
+            padding: 15px;
+        }
+        .profile-card .info h2 {
+            margin: 10px 0;
+            font-size: 22px;
+        }
+        .profile-card .info p {
+            margin: 5px 0;
+            color: #555;
+        }
+/*영상 섹션*/
+        .reviews {
+            flex: 2;
+            min-width: 300px;
+        }
+        .review-item {
+            padding: 40px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .review-item:last-child {
+            border-bottom: none;
+        }
+        .review-item:hover {
+            background-color: #f0f8ff;
+        }
+        .review-item h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        .review-item p {
+            margin: 5px 0 0;
+            color: #555;
+            font-size: 14px;
+        }
+        .review-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .review-item-details {
+            flex-grow: 1;
+            margin-left: 20px;
+        }
+
+/* 사이드바 항목 스타일 */
+        .sidebar {
+            position: fixed;
+            left: 10%;
+            top: 190px;
+            width: 150px;
+            height: 600px;
+            background-color: #f8f9fa;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: auto;
+            gap: 15px;
+            overflow-x: auto;
+        }
+        .sidebar a {
+            text-align: center;
+            text-decoration: none; /* 링크 밑줄 제거 */
+            color: #333; /* 기본 텍스트 색상 */
+            font-size: 0.7em;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px; /* 텍스트와 이미지 간 간격 */
+        }
+        .sidebar a:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar img {
+            width: 70px; /* 이미지 크기 */
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: #f1e1f6;
+            padding: 10px; /* 이미지 내부 패딩 */
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .sidebar img:hover {
+            transform: scale(1.1); /* 호버 시 확대 효과 */
+            background-color: #d6d6f9; /* 호버 시 배경색 변경 */
+        }
+
+        .sidebar h3 {
+            margin: 0;
+            font-size: 1em;
+            color: #555; /* 텍스트 색상 */
+            transition: color 0.3s;
+        }
+
+        .sidebar h3:hover {
+            color: #3498db; /* 호버 시 텍스트 색상 변경 */
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-box">
+            <a href= "index.html">
+                <img src="images/About us.png" class="background-image" />
+            </a>
+        </div>
+    </div>
+    <div class="sidebar">
+        <a href="환경운동가.html">
+            <img src="images/환경 보호 활동가-김환경.png">
+            <h3>환경운동가</h3>
+        </a>
+        <a href="어촌주민.html">
+            <img src="images/어촌주민-박어부.png">
+            <h3>어촌주민</h3>
+        </a>
+        <a href="관리자.html">
+            <img src="images/해수욕장 관리자-최금지.png">
+            <h3>해수욕장 관리자</h3>
+        </a>
+        <a href="안전요원.html">
+            <img src="images/해수욕장 안전요원-계조심.png">
+            <h3>해수욕장 안전요원</h3>
+        </a>
+        <a href="이용객.html">
+            <img src="images/해수욕장 이용객-강바다.png">
+            <h3>해수욕장 이용객</h3>
+        </a>
+        <a href="스포츠애호가.html">
+            <img src="images/해양스포츠 애호가-장서핑.png">
+            <h3>해양스포츠 애호가</h3>
+        </a>
+        <a href="Aboutus.html">
+            <img src="images/About Us.png" >
+            <h3>About Us</h3>
+        </a>
+    </div>
+    <div class="container">
+        <div class="profile-card">
+            <img id="main-image" src="images/해수욕장 이용객-강바다.png" alt="Default Image" class="active">
+            
+            <div class="info">
+                <h2>강바다</h2>
+                <p>#CCTV #드론 #분석</p>
+            </div>
+        </div>
+        <div class="reviews">
+            <div class="review-item" onclick="goToReview()">
+                <img src="images/해운대.png" alt="CCTV">
+                <div class="review-item-details">
+                    <h3>해운대 ★★★★★</h3> 
+                    <p>방문자 리뷰 : 1038 | 리뷰보기 / 리뷰 쓰기</p>
+                    <p>전화 : 010-8226-9227</p>
+                    <p>길찾기 : 4시간 17분소요, 400km</p>
+                </div>
+            </div>
+            <div class="review-item"onclick="goToReview()">
+                <img src="images/경포.png" alt="Drone">
+                <div class="review-item-details">
+                    <h3>경포</h3>
+                    <h3>해운대 ★★★★★</h3> 
+                    <p>방문자 리뷰 : 1038 | 리뷰보기 / 리뷰 쓰기</p>
+                    <p>전화 : 010-8226-9227</p>
+                    <p>길찾기 : 4시간 17분소요, 400km</p>
+                </div>
+            </div>
+            <div class="review-item" onclick="goToReview()">
+                <img src="images/제주.png" alt="Analysis">
+                <div class="review-item-details">
+                    <h3>제주</h3>
+                    <h3>해운대 ★★★★★</h3> 
+                    <p>방문자 리뷰 : 1038 | 리뷰보기 / 리뷰 쓰기</p>
+                    <p>전화 : 010-8226-9227</p>
+                    <p>길찾기 : 4시간 17분소요, 400km</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function goToReview() {
+            window.location.href = "https://example.com/heundae-review"; // 원하는 URL로 변경
+        }
+    </script>
+</body>
+</html>

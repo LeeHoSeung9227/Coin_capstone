@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Menu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.css" />
+
+    <style>
+        .scroll{
+            overflow-x: auto; /* 가로 스크롤 */
+        }
+        /* 섹션 스타일*/
+        .section {
+        flex: 0 0 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2em;
+        color: #333;
+        min-width: 1200px;
+        flex-shrink: 0;
+        box-sizing: border-box;
+   
+        }
+        /* 섹션 배경색: 그라데이션 */
+        .section:nth-child(1) { 
+        background: linear-gradient(135deg, #0b2b50, #8dc3f8); /* 파란색 계열 그라데이션 */
+        color: #fff; /* 텍스트를 흰색으로 유지 */
+        }
+        .section:nth-child(2) { 
+            background: linear-gradient(135deg, #3498db, #6db3f2); 
+            color: #fff; 
+        }
+        .section:nth-child(3) { 
+            background: linear-gradient(135deg, #e74c3c, #ff6e6e); 
+            color: #fff; 
+        }
+        
+        /* 기본 스타일 */
+        body {
+        font-family: 'Noto Sans KR', sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #ffffff;
+        min-width: 100px; /* 최소 너비 */
+        width: 100%; /* 화면 크기 따라 확장 */    
+        overflow-x: auto; /* 바디에 가로 스크롤 추가 */   
+        overflow-y: auto; /* 바디에 가로 스크롤 추가 */ 
+        }
+        #fullpage {
+        display: block;
+        flex-direction: column;
+        min-width: 200px; /* 최소 너비 설정 */
+        }
+
+        /* 상단 히어로 섹션 */
+        .hero {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        
+        }
+        .hero-box {
+            position: relative;
+            width: 100%; /* 원하는 너비로 조정 가능 */
+            max-width: 2000px;
+            height: 200px; /* 원하는 높이로 조정 가능 */
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.5); /* 검정색 반투명 배경 */
+        }
+        .hero-box .background-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            
+        }
+        .hero-box .text-overlay {
+            position: relative;
+            z-index: 2;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5); /* 검정색 반투명 배경 */
+        }
+        .hero-box h1 {
+            font-size: 2em;
+            margin: 0;
+            
+        }
+        .hero-box p {
+            font-size: 1em;
+            margin: 5px 0 0;
+        }
+        .hero-box h4 {
+            font-size: 0.51em;
+            margin: 5px 0 0;
+            color :#9E9FA0;
+        }
+        
+
+        /* 퀵 메뉴 */
+        .menu_quick {
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 0 20%;
+        }
+        .in_Layer ul {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 80px;
+            list-style: none;
+            padding: 0;
+            bottom:100px;
+            left: 30%;
+            
+        }
+        .in_Layer ul li {
+            flex: 0 0 250px; /* 각 항목의 고정 너비 */
+            max-width: 200px;
+            background-color: #213855;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+
+            flex: 0 0 300px; /* 각 항목의 고정 너비 */
+            
+        }
+        .in_Layer ul li:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        .top_ico {
+            width: 100%; /* 부모 박스에 꽉 차도록 */
+            height: 200px; /* 고정 높이 설정 */
+            overflow: hidden; /* 이미지가 벗어나지 않도록 */
+        }
+
+        .top_ico img {
+            width: 100%; /* 이미지를 박스 크기에 맞춤 */
+            height: 100%; /* 이미지가 박스 안에서 꽉 차도록 */
+            object-fit: cover; /* 왜곡되지 않게 잘림 처리 */
+            display: block; /* 이미지 아래 불필요한 공백 제거 */
+        }
+        h3 { font-size: 0.5em; color: #ffffff; margin: 0; }
+        span {
+            display: inline-block;
+            margin-top: 0;
+            margin: 0;
+            color: #FFFFFF;
+            font-size: 0.5em;
+            font-weight: bold;
+            padding: 8px 15px;
+            border: 0.2px solid #888;
+            border-radius: 20px;
+            transition: background 0.3s, color 0.3s;
+        }
+        .in_Layer ul li:hover span {
+            background-color: #333;
+            color: #fff;
+            border-color: #333;
+        }
+        a { text-decoration: none; color: inherit; }
+
+        /* 사이드바 항목 스타일 */
+        .sidebar {
+            position: fixed;
+            left: 10%;
+            top: 480px;
+            width: 150px;
+            height: auto;
+            background-color: #f8f9fa;
+            padding-top: 50px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        .sidebar a {
+            text-align: center;
+            text-decoration: none; /* 링크 밑줄 제거 */
+            color: #333; /* 기본 텍스트 색상 */
+            font-size: 0.7em;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px; /* 텍스트와 이미지 간 간격 */
+        }
+
+        .sidebar img {
+            width: 50px; /* 이미지 크기 */
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: #f1e1f6;
+            padding: 10px; /* 이미지 내부 패딩 */
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .sidebar img:hover {
+            transform: scale(1.1); /* 호버 시 확대 효과 */
+            background-color: #d6d6f9; /* 호버 시 배경색 변경 */
+        }
+
+        .sidebar h3 {
+            margin: 0;
+            font-size: 1em;
+            color: #555; /* 텍스트 색상 */
+            transition: color 0.3s;
+        }
+
+        .sidebar h3:hover {
+            color: #3498db; /* 호버 시 텍스트 색상 변경 */
+        }
+
+        .tm-site-header {
+            padding: 10px 20px 0;
+        }
+        .tm-color-primary { color: #00C8A2; }
+        .tm-mb-15 { margin-bottom: 15px; }
+        .tm-color-gray-2 { color: #98999A; }
+        .tm-color-light-gray { color: #9E9FA0; }
+        .tm-mt-0 { margin-top: 0; }
+        .tm-tagline {
+            font-size: 1.5rem;   
+            margin-left: 130px;
+        }
+
+        /* 반응형 디자인: 창 크기 줄어들 때 사이드바 크기 조정 */
+    /* 반응형 */
+        @media screen and (max-width: 1200px) {
+            body {
+                font-size: 90%; /* 글자 크기 축소 */
+            }
+            .sidebar {
+                width: 120px; /* 사이드바 축소 */
+            }
+            .in_Layer ul li {
+                flex: 0 0 180px; /* 카드 크기 축소 */
+            }
+            .menu_quick {
+            flex-wrap: nowrap; /* 가로 정렬 고정 */
+        }
+        }
+        @media screen and (max-width: 768px) {
+            body {
+                font-size: 80%; /* 글자 크기 축소 */
+            }
+            .in_Layer ul li {
+                flex: 0 0 150px; /* 더 작은 카드 크기 */
+            }
+            .sidebar {
+                width: 100px; /* 사이드바 더 작게 */
+            }
+            .sidebar img {
+                width: 40px; /* 이미지 크기 축소 */
+            }
+        }
+    </style>
+</head>
+<div id="fullpage">  
+    <!-- Section 1 -->
+    <div class="section">
+        <div class="sidebar">
+            <a href="#label1">
+                <img src="images/버튼.png" alt="Label 1">
+                <h3>Label 1</h3>
+            </a>
+            <a href="#label2">
+                <img src="images/버튼.png" alt="Label 2">
+                <h3>Label 2</h3>
+            </a>
+            <a href="#label3">
+                <img src="images/버튼.png" alt="Label 3">
+                <h3>Label 3</h3>
+            </a>
+            <a href="#label4">
+                <img src="images/버튼.png" alt="Label 4">
+                <h3>Label 4</h3>
+            </a>
+        </div>
+        <body>
+            <header class="tm-site-header">
+                <h1 class="tm-mt-0 tm-mb-15"><span class="tm-color-primary">Coin</span> <span class="tm-color-gray-2">Capstone</span></h1>
+                <em class="tm-tagline tm-color-light-gray">해양정보 전달 서비스 사이트</em>
+            </header>
+        <div class="hero">
+            <div class="hero-box">
+                <img src="images/배경.png" alt="배경 이미지" class="background-image" />
+                <div class="text-overlay">
+                    <h1>Coin (Coastal Innovation)</h1>
+                    <p>해양 정보 전달 서비스 사이트</p>
+                    <h4> © 2024 Coin Capstone - All Rights Reserved.</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu_quick">
+            <div class="in_Layer">
+                <ul>
+                    <li><a href="환경운동가.html" target="_blank">
+                        <div class="top_ico"><img src="images/환경 보호 활동가-김환경.png"></div>
+                        <span>환경운동가</span>
+                  
+                    </a></li>
+                    <li><a href="어촌주민.html">
+                        <div class="top_ico"><img src="images/어촌주민-박어부.png"></div>
+                        <h3>어촌주민</h3>
+                
+                    </a></li>
+                    <li><a href="관리자.html">
+                        <div class="top_ico"><img src="images/해수욕장 관리자-최금지.png"></div>
+                        <h3>해수욕장 관리자</h3>
+                  
+                    </a></li>
+                    <li><a href="안전요원.html" target="_blank">
+                        <div class="top_ico"><img src="images/해수욕장 안전요원-계조심.png" ></div>
+                        <h3>해수욕장 안전요원</h3>
+                    
+                    </a></li>
+                </ul>
+                <ul>
+                    <li><a href="이용객.html">
+                        <div class="top_ico"><img src="images/해수욕장 이용객-강바다.png"></div>
+                        <h3>해수욕장 이용객</h3>
+                     
+                    </a></li>
+                    <li><a href="스포츠애호가.html">
+                        <div class="top_ico"><img src="images/해양스포츠 애호가-장서핑.png"></div>
+                        <h3>해양스포츠 애호가</h3>
+                    
+                    </a></li>
+                    <li><a href="Aboutus.html" target="_blank">
+                        <div class="top_ico"><img src="images/About Us.png"></div>
+                        <h3>About Us</h3>
+                       
+                    </a></li>
+                    <li><a href="#">
+                        <div class="top_ico"><img src="images/사람.png"></div>
+                        <h3>회사홍보</h3>
+                     
+                    </a></li>
+                </ul>
+
+                    
+
+                    <!-- 추가 항목들 -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="section">
+        <h1>Section 2</h1>
+        <p>두 번째 섹션 내용입니다.</p>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="section">
+        <h1>Section 3</h1>
+        <p>세 번째 섹션 내용입니다.</p>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/vendors/scrolloverflow.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    new fullpage('#fullpage', {
+        autoScrolling: true,
+        navigation: true,
+        navigationPosition: 'right',
+        css3: false,
+        scrollOverflow: true, // 섹션 안에서 스크롤 허용
+    });
+    fullpage_api.reBuild();
+});
+</script>
+
+</body>
+<footer>
+    © 2024 Coin Capstone - All Rights Reserved.
+</footer>
+</html>

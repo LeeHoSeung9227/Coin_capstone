@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Menu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.css" />
+
+    <style>
+        /* 섹션 스타일*/
+        .section {
+            display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2em;
+        color: #333;
+        height: 100vh;
+        min-width: 100%; /* 창 크기가 줄어들 때 고정된 너비 */
+        flex-shrink: 0; /* 축소 방지 */
+        box-sizing: border-box;
+        overflow: hidden; /* 섹션 내용 넘침 방지 */
+        }
+        .section:nth-child(1) { background-color: #f3f4f6; }
+        .section:nth-child(2) { background-color: #3498db; }
+        .section:nth-child(3) { background-color: #e74c3c; }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        
+
+        #fullpage {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            height: 100vh; /* 전체 높이 */
+            overflow: auto; /* 기본 스크롤 숨김 */
+        }
+
+        .box {
+            flex: 1;
+            min-width: 100vw; /* 섹션이 기본적으로 화면 너비를 채우도록 설정 */
+            height: 100%;
+            display: flex;
+            overflow-x: auto; /* 가로 스크롤 활성화 */
+            scroll-behavior: smooth;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+
+        .box-content {
+            display: flex;
+            flex-wrap: nowrap; /* 가로로 나열 */
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .item {
+            flex: 0 0 300px; /* 각 항목의 고정 너비 */
+            height: 300px;
+            background-color: #007aff;
+            color: white;
+            text-align: center;
+            line-height: 300px;
+            font-size: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        @media screen and (max-width: 768px) {
+            .item {
+                flex: 0 0 200px; /* 창이 작아질 때 아이템 크기 축소 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="fullpage">
+        <!-- Section 1 -->
+        <div class="section">
+            <div class="box">
+                <div class="box-content">
+                    <div class="item">Item 1</div>
+                    <div class="item">Item 2</div>
+                    <div class="item">Item 3</div>
+                    <div class="item">Item 4</div>
+                    <div class="item">Item 5</div>
+                    <div class="item">Item 6</div>
+                </div>
+            </div>
+        </div>
+        
+   
+    <!-- Section 2 -->
+    <div class="section">
+        <h1>Section 2</h1>
+        <p>두 번째 섹션 내용입니다.</p>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="section">
+        <h1>Section 3</h1>
+        <p>세 번째 섹션 내용입니다.</p>
+    </div>
+</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.1.2/fullpage.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        new fullpage('#fullpage', {
+        autoScrolling: true,
+        navigation: true,
+        navigationPosition: 'right',
+        css3: false
+        });
+        fullpage_api.reBuild();
+    });
+</script>
+</body>
+</html>

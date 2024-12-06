@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Palette Demo</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0b2b50, #8dc3f8);
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header {
+            background-color: #0b2b50;
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 2px solid #8dc3f8;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+        .header p {
+            font-size: 1.2rem;
+            color: #d9e3f2;
+        }
+        .content {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        .card {
+            background: #ffffff;
+            color: #0b2b50;
+            border: 1px solid #3a4a62;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+        .card h3 {
+            margin: 0;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        .card p {
+            font-size: 1rem;
+            color: #666;
+        }
+        .button {
+            background: linear-gradient(135deg, #ffcc00, #ff6b6b);
+            color: #ffffff;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease, transform 0.2s;
+        }
+        .button:hover {
+            background: linear-gradient(135deg, #ff6b6b, #ffcc00);
+            transform: scale(1.05);
+        }
+        footer {
+            background-color: #0b2b50;
+            color: #d9e3f2;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Coin Capstone</h1>
+        <p>해양정보 전달 서비스 사이트</p>
+    </header>
+    <div class="content">
+        <div class="card">
+            <h3>환경운동가</h3>
+            <p>환경을 지키는 사람들</p>
+            <button class="button">더 알아보기</button>
+        </div>
+        <div class="card">
+            <h3>어촌주민</h3>
+            <p>어촌 주민의 삶</p>
+            <button class="button">더 알아보기</button>
+        </div>
+        <div class="card">
+            <h3>해양 스포츠</h3>
+            <p>해양 스포츠 애호가들</p>
+            <button class="button">더 알아보기</button>
+        </div>
+    </div>
+    <footer>
+        &copy; 2024 Coin Capstone - All Rights Reserved.
+    </footer>
+</body>
+</html>
+"""
+
+# Display the HTML demo
+display(HTML(html_code))
